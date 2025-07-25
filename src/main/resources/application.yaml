@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: customer-service
+  messages:
+    basename: messages
+    encoding: UTF-8
+    cache-duration: 3600s
+
+logging:
+  level:
+    org.springframework.boot.devtools: DEBUG
