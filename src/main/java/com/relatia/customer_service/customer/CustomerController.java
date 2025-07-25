@@ -1,7 +1,9 @@
 package com.relatia.customer_service.customer;
 
+import com.relatia.customer_service.exception.ErrorResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -37,7 +39,7 @@ import static com.relatia.customer_service.constants.CustomerConstants.CUSTOMER_
     @ApiResponse(
         responseCode = "500",
         description = "Internal Server Error",
-        content = @Content(schema = @Schema(implementation = Void.class))
+        content = @Content(schema = @Schema(implementation = ErrorResponse.class))
     )
 })
 class CustomerController {
@@ -53,19 +55,14 @@ class CustomerController {
         summary = "Get all customers",
         description = "Retrieves a list of all customers in the system"
     )
-    @ApiResponses({
-        @ApiResponse(
-            responseCode = "200",
-            description = "Successfully retrieved list of customers",
-            content = @Content(
-                mediaType = MediaType.APPLICATION_JSON_VALUE,
-                schema = @Schema(implementation = CustomerResponse[].class),
-                examples = @ExampleObject(
-                    value = "[{\"id\":1,\"firstName\":\"John\",\"lastName\":\"Doe\",\"email\":\"john.doe@example.com\",\"phone\":\"+1234567890\",\"address\":\"123 Main St\"}]"
-                )
-            )
+    @ApiResponse(
+        responseCode = "200",
+        description = "Successfully retrieved list of customers",
+        content = @Content(
+            mediaType = MediaType.APPLICATION_JSON_VALUE,
+            array = @ArraySchema(schema = @Schema(implementation = CustomerResponse.class))
         )
-    })
+    )
     @GetMapping
     public ResponseEntity<List<CustomerResponse>> findAll() {
         return ResponseEntity.ok(customerService.findAll());
@@ -87,16 +84,13 @@ class CustomerController {
             description = "Successfully retrieved customer details",
             content = @Content(
                 mediaType = MediaType.APPLICATION_JSON_VALUE,
-                schema = @Schema(implementation = CustomerResponse.class),
-                examples = @ExampleObject(
-                    value = "{\"id\":1,\"firstName\":\"John\",\"lastName\":\"Doe\",\"email\":\"john.doe@example.com\"}"
-                )
+                schema = @Schema(implementation = CustomerResponse.class)
             )
         ),
         @ApiResponse(
             responseCode = "404",
             description = "Customer not found",
-            content = @Content(schema = @Schema(implementation = Void.class))
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class))
         )
     })
     @GetMapping("/{id}")
@@ -127,16 +121,13 @@ class CustomerController {
             description = "Customer successfully created",
             content = @Content(
                 mediaType = MediaType.APPLICATION_JSON_VALUE,
-                schema = @Schema(implementation = CustomerResponse.class),
-                examples = @ExampleObject(
-                    value = "{\"id\":1,\"firstName\":\"John\",\"lastName\":\"Doe\",\"email\":\"john.doe@example.com\"}"
-                )
+                schema = @Schema(implementation = CustomerResponse.class)
             )
         ),
         @ApiResponse(
             responseCode = "400",
             description = "Invalid input",
-            content = @Content(schema = @Schema(implementation = Void.class))
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class))
         )
     })
     @PostMapping(
@@ -148,10 +139,7 @@ class CustomerController {
                 description = "Customer details to create",
                 required = true,
                 content = @Content(
-                    schema = @Schema(implementation = CustomerRequest.class),
-                    examples = @ExampleObject(
-                        value = "{\"firstName\":\"John\",\"lastName\":\"Doe\",\"email\":\"john.doe@example.com\"}"
-                    )
+                    schema = @Schema(implementation = CustomerRequest.class)
                 )
             )
             @Valid @RequestBody CustomerRequest request
@@ -182,12 +170,12 @@ class CustomerController {
         @ApiResponse(
             responseCode = "400",
             description = "Invalid input",
-            content = @Content(schema = @Schema(implementation = Void.class))
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class))
         ),
         @ApiResponse(
             responseCode = "404",
             description = "Customer not found",
-            content = @Content(schema = @Schema(implementation = Void.class))
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class))
         )
     })
     @PutMapping(
@@ -232,7 +220,7 @@ class CustomerController {
         @ApiResponse(
             responseCode = "404",
             description = "Customer not found",
-            content = @Content(schema = @Schema(implementation = Void.class))
+            content = @Content(schema = @Schema(implementation = ErrorResponse.class))
         )
     })
     @DeleteMapping("/{id}")
