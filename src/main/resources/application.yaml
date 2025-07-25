@@ -1,11 +1,57 @@
 spring:
   application:
     name: customer-service
-  messages:
-    basename: messages
-    encoding: UTF-8
-    cache-duration: 3600s
+  
+  # H2 Database Configuration
+  datasource:
+    url: jdbc:h2:mem:customerdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+    
+  # H2 Console Configuration
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        web-allow-others: false
+        trace: false
+  
+  # JPA Configuration
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+        jdbc:
+          batch_size: 25
+        order_inserts: true
+        order_updates: true
 
+# Server Configuration
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+# Logging Configuration
 logging:
   level:
-    org.springframework.boot.devtools: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.springframework.web: INFO
+
+# H2 Console Security (in development only)
+management:
+  endpoints:
+    web:
+      exposure:
+        include: h2-console,health,info
+  endpoint:
+    health:
+      show-details: always

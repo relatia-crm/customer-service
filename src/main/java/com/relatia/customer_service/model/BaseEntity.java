@@ -13,8 +13,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
-@Hidden
 @MappedSuperclass
+@Schema(hidden = true)
 @EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter
