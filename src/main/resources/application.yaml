@@ -22,8 +22,9 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
-      ddl-auto: update
+      ddl-auto: none  # Disable Hibernate auto DDL
     show-sql: true
+    defer-datasource-initialization: true  # Ensure schema.sql runs before data.sql
     properties:
       hibernate:
         format_sql: true
@@ -32,6 +33,13 @@ spring:
           batch_size: 25
         order_inserts: true
         order_updates: true
+  
+  # SQL Initialization
+  sql:
+    init:
+      mode: always  # Always run schema.sql
+      platform: h2  # Explicitly set the platform
+      continue-on-error: false  # Fail on SQL errors
 
 # Server Configuration
 server:

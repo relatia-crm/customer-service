@@ -31,7 +31,6 @@ public class Customer extends BaseEntity {
     @Column(nullable = false, unique = true)
     private String email;
     
-    @Column(name = "phone_number")
     private String phone;
     
     @Column(columnDefinition = "TEXT")
