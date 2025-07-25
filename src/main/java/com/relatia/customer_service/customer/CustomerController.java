@@ -1,6 +1,9 @@
 package com.relatia.customer_service.customer;
 
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -9,7 +12,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping(path = CustomerConstants.CUSTOMER_API)
+import static com.relatia.customer_service.constants.CustomerConstants.CUSTOMER_API;
+
+@Tag(name = "Customer", description = "Customer API")
+@RequestMapping(path = CUSTOMER_API)
 @RestController
 @RequiredArgsConstructor
 class CustomerController {
@@ -26,6 +32,8 @@ class CustomerController {
         return ResponseEntity.ok(customerService.findById(id));
     }
 
+    @Operation(summary = "Create a new customer", description = "Create a new customer")
+    @ApiResponse(responseCode = "201", description = "Created")
     @PostMapping
     public ResponseEntity<CustomerResponse> create(@Valid @RequestBody CustomerRequest request) {
         return new ResponseEntity<>(customerService.create(request), HttpStatus.CREATED);
