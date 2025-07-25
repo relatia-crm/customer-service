@@ -11,8 +11,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
-public class CustomerRequest extends BaseDto {
+public class CustomerRequest  {
 
     @NotBlank(message = "{validation.firstname.required}")
     @Size(max = 100, message = "{validation.firstname.size}")
