@@ -38,20 +38,14 @@ class CustomerServiceImpl implements CustomerService {
     @Override
     @Transactional
     public CustomerResponse create(CustomerRequest request) {
-        if (customerRepository.existsByEmail(request.email())) {
+        if (customerRepository.existsByEmail(request.getEmail())) {
             throw new IllegalArgumentException(
                 messageSource.getMessage("error.email.exists", 
                 null, 
                 LocaleContextHolder.getLocale()));
         }
 
-        var customer = Customer.builder()
-                .firstName(request.firstName())
-                .lastName(request.lastName())
-                .email(request.email())
-                .phone(request.phone())
-                .address(request.address())
-                .build();
+        Customer customer = request.toEntity();
 
         return CustomerResponse.fromEntity(customerRepository.save(customer));
     }
@@ -59,25 +53,25 @@ class CustomerServiceImpl implements CustomerService {
     @Override
     @Transactional
     public CustomerResponse update(Long id, CustomerRequest request) {
-        var customer = customerRepository.findById(id)
+        Customer customer = customerRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(
                     messageSource.getMessage("error.customer.notfound", 
                     new Object[]{id}, 
                     LocaleContextHolder.getLocale())));
 
-        if (!customer.getEmail().equals(request.email()) && 
-            customerRepository.existsByEmail(request.email())) {
+        if (!customer.getEmail().equals(request.getEmail()) &&
+            customerRepository.existsByEmail(request.getEmail())) {
             throw new IllegalArgumentException(
                 messageSource.getMessage("error.email.exists", 
                 null, 
                 LocaleContextHolder.getLocale()));
         }
 
-        customer.setFirstName(request.firstName());
-        customer.setLastName(request.lastName());
-        customer.setEmail(request.email());
-        customer.setPhone(request.phone());
-        customer.setAddress(request.address());
+        customer.setFirstName(request.getFirstName());
+        customer.setLastName(request.getLastName());
+        customer.setEmail(request.getEmail());
+        customer.setPhone(request.getPhone());
+        customer.setAddress(request.getAddress());
 
         return CustomerResponse.fromEntity(customerRepository.save(customer));
     }
