@@ -2,9 +2,8 @@ spring:
   application:
     name: customer-service
   config:
-    import: classpath:organisation-config.yaml  # or optional:classpath:organisation.yml
+    import: classpath:organisation.yaml  # or optional:classpath:organisation.yml
 
-  
   # H2 Database Configuration
   datasource:
     url: jdbc:h2:mem:customerdb
