@@ -2,7 +2,7 @@ spring:
   application:
     name: customer-service
   config:
-    import: configserver:http://localhost:8888
+    import: configserver:http://localhost:8071
 
   # H2 Database Configuration
   datasource:
@@ -60,12 +60,6 @@ logging:
 management:
   endpoints:
     web:
+      base-path: /actuator
       exposure:
-        include: h2-console,health,info
-  endpoint:
-    health:
-      show-details: always
-
-# Custom Properties
-build:
-  version: 1.0.0
+        include: "*"  # This exposes all endpoints
