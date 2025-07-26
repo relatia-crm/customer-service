@@ -1,3 +1,0 @@
-spring:
-  config:
-    import: classpath:organisation-prod.yaml  # or optional:classpath:organisation.yml

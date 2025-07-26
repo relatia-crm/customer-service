@@ -2,7 +2,7 @@ spring:
   application:
     name: customer-service
   config:
-    import: classpath:organisation.yaml  # or optional:classpath:organisation.yml
+    import: configserver:http://localhost:8888
 
   # H2 Database Configuration
   datasource:
