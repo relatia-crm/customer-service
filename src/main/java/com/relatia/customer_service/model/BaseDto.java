@@ -8,7 +8,7 @@ import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
 
-import static com.relatia.customer_service.constants.CustomerConstants.DATE_TIME_FORMAT;
+import static com.relatia.customer_service.constants.GlobalConstants.DATE_TIME_FORMAT;
 
 @Getter
 @Setter

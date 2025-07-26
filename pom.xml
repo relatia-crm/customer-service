@@ -11,6 +11,7 @@
 	<groupId>com.relatia</groupId>
 	<artifactId>customer-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 	<name>customer-service</name>
 	<description>Customer service</description>
 	<url/>
@@ -91,6 +92,19 @@
 							<artifactId>lombok</artifactId>
 						</path>
 					</annotationProcessorPaths>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.google.cloud.tools</groupId>
+				<artifactId>jib-maven-plugin</artifactId>
+				<version>3.4.6</version>
+				<configuration>
+					<to>
+						<image>docker.io/gokultmail/${project.artifactId}</image>
+					</to>
+					<dockerClient>
+						<executable>/usr/bin/podman</executable>
+					</dockerClient>
 				</configuration>
 			</plugin>
 			<plugin>

@@ -1,4 +1,4 @@
-package com.relatia.customer_service.audit;
+package com.relatia.customer_service.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

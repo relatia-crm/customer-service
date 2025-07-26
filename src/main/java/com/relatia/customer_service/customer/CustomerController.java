@@ -5,7 +5,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -19,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.relatia.customer_service.constants.CustomerConstants.CUSTOMER_API;
+import static com.relatia.customer_service.constants.GlobalConstants.CUSTOMER_API;
 
 /**
  * REST controller for managing customer operations.

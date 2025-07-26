@@ -1,0 +1,17 @@
+organisation:
+    name: "My Organisation"
+    address:
+        street: "123 Main St"
+        city: "Anytown"
+        state: "CA"
+        zip: "12345"
+    contact:
+        name: "John Doe"
+        email: "i9e1C@example.com"
+    phone: "123-456-7890"
+    website: "https://example.com"
+    logo: "https://example.com/logo.png"
+    social:
+        facebook: "https://www.facebook.com/myorg"
+        twitter: "https://twitter.com/myorg"
+        instagram: "https://www.instagram.com/myorg"

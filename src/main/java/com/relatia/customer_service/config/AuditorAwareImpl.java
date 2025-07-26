@@ -1,4 +1,4 @@
-package com.relatia.customer_service.audit;
+package com.relatia.customer_service.config;
 
 import jakarta.validation.constraints.NotNull;
 import org.springframework.data.domain.AuditorAware;

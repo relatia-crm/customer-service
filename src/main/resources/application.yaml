@@ -1,6 +1,9 @@
 spring:
   application:
     name: customer-service
+  config:
+    import: classpath:organisation-config.yaml  # or optional:classpath:organisation.yml
+
   
   # H2 Database Configuration
   datasource:
@@ -63,3 +66,7 @@ management:
   endpoint:
     health:
       show-details: always
+
+# Custom Properties
+build:
+  version: 1.0.0
