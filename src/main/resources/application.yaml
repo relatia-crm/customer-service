@@ -35,9 +35,8 @@ logging:
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
     org.springframework.web: INFO
 
-management:
-  endpoints:
-    web:
-      base-path: /actuator
-      exposure:
-        include: "*"  # This exposes all endpoints
+info:
+  app:
+    name: "customer-service"
+    description: "Customer Service Microservice"
+    version: "1.0.0"
