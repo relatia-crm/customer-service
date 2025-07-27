@@ -5,44 +5,22 @@ spring:
   profiles:
     active: dev
 
-  # H2 Database Configuration
+  # Database Configuration
   datasource:
-    url: jdbc:h2:mem:customerdb
-    driver-class-name: org.h2.Driver
-    username: sa
-    password: password
-    
-  # H2 Console Configuration
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
-      settings:
-        web-allow-others: false
-        trace: false
-  
+    url: jdbc:mysql://localhost:3306/customerdb
+    username: root
+    password: root
+
   # JPA Configuration
+
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
-    hibernate:
-      ddl-auto: none  # Disable Hibernate auto DDL
     show-sql: true
-    defer-datasource-initialization: true  # Ensure schema.sql runs before data.sql
-    properties:
-      hibernate:
-        format_sql: true
-        use_sql_comments: true
-        jdbc:
-          batch_size: 25
-        order_inserts: true
-        order_updates: true
-  
+
   # SQL Initialization
+
   sql:
     init:
-      mode: always  # Always run schema.sql
-      platform: h2  # Explicitly set the platform
-      continue-on-error: false  # Fail on SQL errors
+      mode: always
 
 # Server Configuration
 server:
@@ -57,7 +35,6 @@ logging:
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
     org.springframework.web: INFO
 
-# H2 Console Security (in development only)
 management:
   endpoints:
     web:

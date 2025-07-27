@@ -1,3 +1,8 @@
 spring:
   config:
     import: configserver:http://config-server:8071
+
+  datasource:
+    url: jdbc:mysql://customerdb:3306/customerdb
+    username: root
+    password: root
