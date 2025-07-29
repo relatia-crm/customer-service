@@ -10,7 +10,7 @@ import static com.relatia.customer_service.constants.GlobalConstants.NOTIFICATIO
 /**
  * Feign client for interacting with the Notification Service.
  */
-@FeignClient(name = "notification-service", path = NOTIFICATION_API)
+@FeignClient(name = "notification-service", path = NOTIFICATION_API, fallback = NotificationClientFallback.class)
 public interface NotificationClient {
 
     /**
